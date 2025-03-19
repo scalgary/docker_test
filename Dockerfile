@@ -7,8 +7,12 @@ WORKDIR /app
 # Copier les fichiers du projet dans le conteneur
 COPY . /app/
 
-# Installer les dépendances
-RUN pip install --no-cache-dir -r requirements.txt
+# Créer un environnement virtuel dans /app/venv
+RUN python -m venv venv
 
-# Définir la commande à exécuter au lancement du conteneur
-CMD ["python", "app.py"]
+# Activer l'environnement et installer les dépendances
+RUN /app/venv/bin/pip install --upgrade pip && \
+    /app/venv/bin/pip install --no-cache-dir -r requirements.txt
+
+# Utiliser l'environnement virtuel pour exécuter l'application
+CMD ["/app/venv/bin/python", "app.py"]

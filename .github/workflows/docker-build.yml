@@ -28,4 +28,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: tondockerhub/docker_test:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/docker_test:latest
